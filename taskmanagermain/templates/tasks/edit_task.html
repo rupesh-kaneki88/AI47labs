@@ -1,0 +1,22 @@
+{% extends "tasks/base.html" %}
+
+{% block content %}
+<h1>Edit Task</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ task.title }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control">{{ task.description }}</textarea>
+    </div>
+    <div class="form-check mb-3">
+        <input type="checkbox" name="completed" id="completed" class="form-check-input" {% if task.completed %}checked{% endif %}>
+        <label for="completed" class="form-check-label">Completed</label>
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a href="{% url 'task_list' %}" class="btn btn-secondary">Back</a>
+</form>
+{% endblock %}
